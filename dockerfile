@@ -1,5 +1,8 @@
 FROM php:8.2-apache
 
+ARG UID
+ARG GID
+
 WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
@@ -19,10 +22,17 @@ COPY . /var/www/html/
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Créer cache et permissions
-RUN mkdir -p /var/www/html/src/cache \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+RUN groupadd -g ${GID} laravel && \
+    useradd -u ${UID} -g laravel -m -s /bin/bash laravel
+
+RUN usermod -aG www-data laravel
+
+COPY . /var/www/html/
+
+RUN chown -R laravel:www-data /var/www/html \
+    && find /var/www/html -type d -exec chmod 775 {} \; \
+    && find /var/www/html -type f -exec chmod 664 {} \; \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
