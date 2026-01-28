@@ -17,5 +17,10 @@ class AuthService
         {
             return $this->AuthRepository->login($email, $password);
         }
+
+        public function register($FULL_NAME, $EMAIL, $password)
+        {
+            return $this->AuthRepository->register($FULL_NAME, $EMAIL, $password);
+        }
     }
 ?>

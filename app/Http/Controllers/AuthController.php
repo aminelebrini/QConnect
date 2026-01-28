@@ -15,7 +15,7 @@ class AuthController extends Controller
         $this->AuthService = $authService;
     }
 
-    public function showLogin()
+    public function Show()
     {
         return view('home');
     }
@@ -34,6 +34,14 @@ class AuthController extends Controller
 
     public function register()
     {
+        $FULL_NAME = request('full_name');
+        echo $FULL_NAME;
+        $EMAIL = request('email');
+        $password = request('password');
+
+        if($this->AuthService->register($FULL_NAME, $EMAIL, $password)) {
+            return view('home');
+        }
 
     }
 
