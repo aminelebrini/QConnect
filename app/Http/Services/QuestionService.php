@@ -17,6 +17,13 @@ class QuestionService
         {
             return $this->QuestionRepository->createQuestion($titre, $description, $user_id,$city);
         }
+
+        public function ReigstreFavoris($question_id, $user_id)
+        {
+            return $this->QuestionRepository->Reigstre_Favoris($question_id, $user_id);
+        }
+
+
     }
 
 ?>

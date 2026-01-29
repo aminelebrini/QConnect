@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\QuestionService;
+use App\Models\Favoris;
 use App\Models\Question;
 use Illuminate\Http\Request;
 class QuestionController extends Controller
@@ -26,12 +27,36 @@ class QuestionController extends Controller
         }
     }
 
-    public function index()
+    public function Favoris()
     {
-        $questions = Question::all();
-        return view('affichage', compact('questions'));
+        $user_id = auth()->id();
+        $question_id = request('question_id');
+        $reponse_id = request('reponse_id');
+
+        if($this->questionService->ReigstreFavoris($question_id, $user_id)) {
+            return redirect()->route('affichage');
+        }
 
     }
+
+    public function index()
+    {
+        $user = auth()->user();
+        $search = request('search');
+        $favoris = Favoris::with('question.reponses')->where('user_id', $user->id)->get();
+        if ($search) {
+            $questions = Question::where('titre', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%")
+                ->get();
+        } else {
+            $questions = Question::all();
+        }
+
+        return view('affichage', compact('questions','favoris'));
+
+    }
+
+
 
 
 
