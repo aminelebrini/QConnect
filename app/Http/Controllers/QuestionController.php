@@ -39,6 +39,15 @@ class QuestionController extends Controller
 
     }
 
+    public function delete()
+    {
+        $favoris_id = request('favid');
+
+        if($this->questionService->delete($favoris_id)) {
+            return redirect()->route('affichage');
+        }
+    }
+
     public function index()
     {
         $user = auth()->user();

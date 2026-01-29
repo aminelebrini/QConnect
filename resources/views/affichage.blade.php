@@ -316,6 +316,106 @@
         .btn-search-submit:active {
             transform: translateY(0);
         }
+        .comments-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .replies-wrapper {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .comment-item:hover {
+            background: #f8fafc;
+        }
+
+        .comment-avatar-mini {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .comment-body {
+            flex: 1;
+        }
+
+        .comment-user {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .comment-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .quick-reply-form {
+            display: flex;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 12px;
+            align-items: center;
+        }
+
+        .quick-reply-form input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            outline: none;
+            color: var(--text-main);
+        }
+
+        .quick-reply-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quick-reply-form button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .comment-count-badge {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            background: #eef2ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body>
@@ -380,13 +480,13 @@
 
                         <div class="question-content">
                             <h2 style="font-size: 1.3rem; margin: 10px 0;">{{ $question->titre }}</h2>
-                            <p style="color: var(--text-muted); line-height: 1.6;">{{ Str::limit($question->description, 150) }}</p>
+                            <p style="color: var(--text-muted); line-height: 1.6;">{{ $question->description }}</p>
                         </div>
 
                         <div class="card-footer">
-                            <span style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">
-                                <i class="fa-regular fa-comment"></i> {{ $question->reponses->count() }} réponses
-                            </span>
+                <span class="comment-count-badge">
+                    <i class="fa-regular fa-comment"></i> {{ $question->reponses->count() }} réponses
+                </span>
 
                             <form method="POST" action="{{ route('favoris.store') }}">
                                 @csrf
@@ -395,6 +495,31 @@
                                     <i class="fa-regular fa-star"></i> Sauvegarder
                                 </button>
                             </form>
+                        </div>
+
+                        <div class="comments-section">
+                            @if($question->reponses->count() > 0)
+                                <div class="replies-wrapper">
+                                    @foreach($question->reponses as $reply)
+                                        <div class="comment-item">
+                                            <div class="comment-avatar-mini">{{ substr($reply->user->fullname ?? 'U', 0, 1) }}</div>
+                                            <div class="comment-body">
+                                                <div class="comment-user">{{ $reply->user->fullname ?? 'Utilisateur' }}</div>
+                                                <p class="comment-text">{{ $reply->content }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if($question->user->id !== Auth::id())
+                                <form action="{{ route('reponses.store') }}" method="POST" class="quick-reply-form">
+                                    @csrf
+                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+                                    <input type="text" name="message" placeholder="Écrire une réponse..." required>
+                                    <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 @endforeach
@@ -416,13 +541,13 @@
                                     <span style="font-size: 0.75rem; color: var(--text-muted)">{{ $fav->question->created_at->diffForHumans() }}</span>
                                 </div>
 
-{{--                                <form action="{{ route('favoris.destroy', $fav->id) }}" method="POST" style="margin:0">--}}
-{{--                                    @csrf--}}
-{{--                                    @method('DELETE')--}}
-{{--                                    <button type="submit" class="btn-remove" title="Supprimer des favoris">--}}
-{{--                                        <i class="fa-solid fa-trash-can"></i>--}}
-{{--                                    </button>--}}
-{{--                                </form>--}}
+                                <form action="{{ route('favoris.delete')}}" method="POST" style="margin:0">
+                                    @csrf
+                                    <input type="hidden" name="favid" value="{{ $fav->id }}">
+                                    <button type="submit" class="btn-remove" title="Supprimer des favoris">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="question-content">

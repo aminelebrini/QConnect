@@ -23,6 +23,10 @@ class QuestionService
             return $this->QuestionRepository->Reigstre_Favoris($question_id, $user_id);
         }
 
+        public function delete($favoris_id)
+        {
+            return $this->QuestionRepository->delete($favoris_id);
+        }
 
     }
 

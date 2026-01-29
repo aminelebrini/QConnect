@@ -31,6 +31,11 @@ class QuestionRepository
         return $favoris;
 
     }
+    public function delete($favoris_id)
+    {
+        $favoris = Favoris::find($favoris_id);
+        $favoris->delete();
+    }
 }
 
 ?>
