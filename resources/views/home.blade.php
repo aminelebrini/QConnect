@@ -148,6 +148,7 @@
 
         .overlay-panel h1 { color: white !important; font-size: 2rem; }
         .overlay-panel p {
+            text-align: center;
             font-size: 14px;
             line-height: 1.6;
             margin: 0px 0 0px;
@@ -237,7 +238,7 @@
                     <i class="fas fa-paper-plane fa-3x"></i>
                 </div>
                 <h1>Salut l'ami !</h1>
-                <p>Rejoins <strong>QConnect</strong> aujourd'hui.<br>Crée ton compte et explore de nouveaux horizons avec nous !</p>
+                <p>Rejoins <strong>QConnect</strong> aujourd'hui.<br>Créez votre compte et explorez de nouveaux endroits avec nous !</p>
                 <button class="ghost" id="signUp">S'inscrire</button>
             </div>
 

@@ -22,17 +22,14 @@ class QuestionController extends Controller
         $city = request('city');
 
         if($this->questionService->createQuestion($titre, $description, $user_id,$city)) {
-            return view('affichage');
+            return redirect()->route('affichage');
         }
     }
 
     public function index()
     {
         $questions = Question::all();
-        return view('affichage', [
-            'title' => "affichage",
-            'questions' => $questions
-        ]);
+        return view('affichage', compact('questions'));
 
     }
 

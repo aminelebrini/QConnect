@@ -22,7 +22,7 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); margin: 0; display: flex; }
 
         /* Sidebar */
-        .sidebar { width: 260px; background: var(--sidebar); height: 100vh; color: white; position: fixed; padding: 1.5rem; }
+        .sidebar { width: 230px; background: var(--sidebar); height: 100vh; color: white; position: fixed; padding: 1.5rem; }
         .sidebar h2 { color: #818cf8; font-size: 1.5rem; margin-bottom: 2rem; }
         .nav-link { display: flex; align-items: center; gap: 12px; color: #94a3b8; text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
         .nav-link:hover, .nav-link.active { background: #334155; color: white; }
@@ -77,22 +77,21 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>Total Questions</h3>
-                    <p>{{ $totalQuestions ?? '124' }}</p>
+                    <p>{{ count($questions) ?? '124' }}</p>
                 </div>
                 <div class="stat-card" style="border-left-color: var(--success);">
                     <h3>Total Réponses</h3>
-                    <p>{{ $totalReplies ?? '458' }}</p>
+                    <p>{{ count($reponses) ?? '458' }}</p>
                 </div>
                 <div class="stat-card" style="border-left-color: #f59e0b;">
-                    <h3>Plus Populaire</h3>
-                    <p style="font-size: 1rem; margin-top: 15px;">{{ $popularQuestion->titre ?? 'Panne d\'électricité...' }}</p>
+                    <h3>Total Utilisateurs</h3>
+                    <p>{{ count($users) }}</p>
                 </div>
             </div>
 
             <div class="data-card" id="questions">
                 <div class="card-header">
                     <h2 style="font-size: 1.1rem;">Gestion des Questions</h2>
-                    <input type="text" class="search-box" placeholder="Rechercher par mot-clé ou lieu...">
                 </div>
                 <table>
                     <thead>
@@ -101,22 +100,15 @@
                         <th>Question</th>
                         <th>Localisation</th>
                         <th>Date</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                  {{--le probleme ici --}}  @foreach($questions as $question)
+                    @foreach($questions as $question)
                         <tr>
                             <td><strong>{{ $question->user->fullname }}</strong></td>
                             <td>{{ Str::limit($question->titre, 40) }}</td>
                             <td><span class="badge badge-geo"><i class="fa-solid fa-location-dot"></i> {{ $question->city }}</span></td>
                             <td>{{ $question->created_at->format('d/m/Y') }}</td>
-                            <td>
-                                <form action="{{ route('admin.questions.delete', $question->id) }}" method="POST" onsubmit="return confirm('Supprimer cette question ?')">
-                                    @csrf @method('DELETE')
-                                    <button class="btn-action btn-delete"><i class="fa-solid fa-trash"></i></button>
-                                </form>
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -133,21 +125,14 @@
                         <th>Utilisateur</th>
                         <th>Réponse</th>
                         <th>Sur la question</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($allReplies as $reply)
+                    @foreach($reponses as $reply)
                         <tr>
                             <td>{{ $reply->user->fullname }}</td>
-                            <td style="color: var(--text-muted);">{{ Str::limit($reply->message, 50) }}</td>
+                            <td style="color: var(--text-muted);">{{ Str::limit($reply->content, 50) }}</td>
                             <td>{{ Str::limit($reply->question->titre, 30) }}</td>
-                            <td>
-                                <form action="{{ route('admin.replies.delete', $reply->id) }}" method="POST">
-                                    @csrf @method('DELETE')
-                                    <button class="btn-action btn-delete"><i class="fa-solid fa-trash"></i></button>
-                                </form>
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
