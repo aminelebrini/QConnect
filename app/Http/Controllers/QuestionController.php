@@ -48,6 +48,26 @@ class QuestionController extends Controller
         }
     }
 
+    public function deletequestion()
+    {
+        $question_id = request('questionid');
+        if($this->questionService->deletequestion($question_id)) {
+            return redirect()->route('affichage');
+        }
+    }
+
+    public function update()
+    {
+        $titre = request('titre');
+        $description = request('description');
+        $city = request('city');
+        $question_id = request('question_id');
+
+        if($this->questionService->modifier($titre, $description, $city, $question_id)) {
+            return redirect()->route('affichage');
+        }
+    }
+
     public function index()
     {
         $user = auth()->user();

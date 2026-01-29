@@ -27,6 +27,15 @@ class QuestionService
         {
             return $this->QuestionRepository->delete($favoris_id);
         }
+        public function deletequestion($question_id)
+        {
+            return $this->QuestionRepository->deletequestion($question_id);
+        }
+
+        public function modifier($titre, $description, $city, $question_id)
+        {
+            return $this->QuestionRepository->modifier($titre, $description, $city, $question_id);
+        }
 
     }
 

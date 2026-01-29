@@ -70,6 +70,7 @@
             width: 100%;
             font-family: inherit;
             font-size: 0.95rem;
+            text-align: left;
         }
 
         .nav-link:hover {
@@ -243,57 +244,40 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 2rem;
         }
 
         .search-box {
             position: relative;
-            width: 100%;
             display: flex;
-            flex-direction: row;
             align-items: center;
-            justify-content: space-between;
+            gap: 10px;
         }
 
         .search-box i {
             position: absolute;
             left: 15px;
             color: var(--text-muted);
-            transition: 0.3s;
             pointer-events: none;
         }
 
         .search-box input {
-            width: 100%;
             padding: 12px 15px 12px 45px;
             background: #f1f5f9;
             border: 2px solid transparent;
             border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            color: var(--text-main);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .search-box input::placeholder {
-            color: #94a3b8;
-        }
-
-        .search-box input:hover {
-            background: #eef2ff;
+            font-family: inherit;
+            width: 250px;
+            transition: all 0.3s;
         }
 
         .search-box input:focus {
             outline: none;
             background: white;
             border-color: var(--primary-light);
-            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .search-box input:focus + i,
-        .search-box:focus-within i {
-            color: var(--primary);
-
-        }
         .btn-search-submit {
             background: var(--primary);
             color: white;
@@ -301,21 +285,9 @@
             padding: 12px 20px;
             border-radius: 12px;
             font-weight: 600;
-            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
-        .btn-search-submit:hover {
-            background: var(--primary-dark);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .btn-search-submit:active {
-            transform: translateY(0);
-        }
         .comments-section {
             margin-top: 1rem;
             padding-top: 1rem;
@@ -334,87 +306,63 @@
             margin-bottom: 12px;
             padding: 8px;
             border-radius: 10px;
-            transition: background 0.2s;
-        }
-
-        .comment-item:hover {
-            background: #f8fafc;
         }
 
         .comment-avatar-mini {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             background: var(--primary-light);
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .comment-body {
-            flex: 1;
-        }
-
-        .comment-user {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 2px;
-        }
-
-        .comment-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.4;
+            color: white; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
         }
 
         .quick-reply-form {
-            display: flex;
-            gap: 8px;
-            background: #f1f5f9;
-            padding: 6px;
-            border-radius: 12px;
-            align-items: center;
+            display: flex; gap: 8px; background: #f1f5f9;
+            padding: 6px; border-radius: 12px; align-items: center;
         }
 
         .quick-reply-form input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 8px 12px;
-            font-size: 0.9rem;
-            outline: none;
-            color: var(--text-main);
+            flex: 1; background: transparent; border: none;
+            padding: 8px 12px; outline: none;
         }
 
         .quick-reply-form button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .quick-reply-form button:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
+            background: var(--primary); color: white; border: none;
+            width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
         }
 
         .comment-count-badge {
-            font-size: 0.85rem;
-            color: var(--primary);
-            font-weight: 600;
-            background: #eef2ff;
-            padding: 5px 12px;
-            border-radius: 20px;
+            font-size: 0.85rem; color: var(--primary); font-weight: 600;
+            background: #eef2ff; padding: 5px 12px; border-radius: 20px;
+        }
+
+        .question-header {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; margin-bottom: 1.2rem;
+        }
+
+        .user-meta-data { display: flex; align-items: center; gap: 12px; }
+
+        .edit-field {
+            width: 100%; padding: 12px; border: 1px solid #e2e8f0;
+            border-radius: 10px; margin-bottom: 1rem; box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .edit-group label {
+            display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-main);
+        }
+
+        .edit-actions-row { display: flex; gap: 10px; margin-top: 10px; }
+
+        .btn-save-edit {
+            background: var(--primary); color: white; border: none;
+            padding: 14px; border-radius: 12px; flex: 1; font-weight: 700; cursor: pointer;
+        }
+
+        .btn-cancel-edit {
+            background: #f1f5f9; color: var(--text-main); border: none;
+            padding: 14px; border-radius: 12px; flex: 1; font-weight: 700; cursor: pointer;
         }
     </style>
 </head>
@@ -450,18 +398,18 @@
 
     <main>
         <header>
-            <button onclick="openModal()" class="btn-ask">
+            <button onclick="openModal('postModal')" class="btn-ask">
                 <i class="fa-solid fa-plus-circle"></i> Poser une question
             </button>
         </header>
 
         <div class="container" id="mainContainer">
             <div class="header-actions">
-                <h1 id="pageTitle" style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 2rem;">Découvrir</h1>
+                <h1 id="pageTitle" style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.025em; margin:0;">Découvrir</h1>
                 <form method="GET" action="{{ route('affichage') }}">
                     <div class="search-box">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Rechercher une question..." name="search">
+                        <input type="text" placeholder="Rechercher..." name="search">
                         <button type="submit" class="btn-search-submit">Chercher</button>
                     </div>
                 </form>
@@ -471,23 +419,36 @@
                 @foreach($questions as $question)
                     <div class="question-card">
                         <div class="question-header">
-                            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-                            <div class="user-info">
-                                <h4 style="margin:0">{{ $question->user->fullname ?? 'Anonyme' }}</h4>
-                                <span style="font-size: 0.75rem; color: var(--text-muted)">{{ $question->created_at->diffForHumans() }}</span>
+                            <div class="user-meta-data">
+                                <div class="avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div class="user-info">
+                                    <h4>{{ $question->user->fullname ?? 'Anonyme' }}</h4>
+                                    <span class="timestamp">{{ $question->created_at->diffForHumans() }}</span>
+                                </div>
                             </div>
+
+                            @if($question->user_id === Auth::id())
+                                <button onclick="openEditModal('{{ $question->id }}', '{{ addslashes($question->titre) }}', '{{ addslashes($question->city) }}', '{{ addslashes($question->description) }}')" class="btn-edit-trigger" title="Modifier">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            @endif
                         </div>
 
                         <div class="question-content">
                             <h2 style="font-size: 1.3rem; margin: 10px 0;">{{ $question->titre }}</h2>
+                            <div style="display: flex; align-items: center; gap: 6px; color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 12px;">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>{{ $question->city }}</span>
+                            </div>
                             <p style="color: var(--text-muted); line-height: 1.6;">{{ $question->description }}</p>
                         </div>
 
                         <div class="card-footer">
-                <span class="comment-count-badge">
-                    <i class="fa-regular fa-comment"></i> {{ $question->reponses->count() }} réponses
-                </span>
-
+                            <span class="comment-count-badge">
+                                <i class="fa-regular fa-comment"></i> {{ $question->reponses->count() }} réponses
+                            </span>
                             <form method="POST" action="{{ route('favoris.store') }}">
                                 @csrf
                                 <input type="hidden" name="question_id" value="{{ $question->id }}">
@@ -495,6 +456,15 @@
                                     <i class="fa-regular fa-star"></i> Sauvegarder
                                 </button>
                             </form>
+                            @if(Auth::user()->id === $question->user_id)
+                                <form action="{{ route('question.delete')}}" method="POST" style="margin:0">
+                                    @csrf
+                                    <input type="hidden" name="questionid" value="{{ $question->id }}">
+                                    <button type="submit" class="btn-remove" title="Supprimer">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </div>
 
                         <div class="comments-section">
@@ -512,7 +482,7 @@
                                 </div>
                             @endif
 
-                            @if($question->user->id !== Auth::id())
+                            @if($question->user_id !== Auth::id())
                                 <form action="{{ route('reponses.store') }}" method="POST" class="quick-reply-form">
                                     @csrf
                                     <input type="hidden" name="question_id" value="{{ $question->id }}">
@@ -532,7 +502,8 @@
                 </div>
                 <div class="favoris-grid">
                     @foreach($favoris as $fav)
-                        <div class="question-card fav-card-styled"> <div class="question-header">
+                        <div class="question-card fav-card-styled">
+                            <div class="question-header">
                                 <div class="avatar" style="background: #fef3c7; color: #d97706;">
                                     <i class="fa-solid fa-bookmark"></i>
                                 </div>
@@ -544,7 +515,7 @@
                                 <form action="{{ route('favoris.delete')}}" method="POST" style="margin:0">
                                     @csrf
                                     <input type="hidden" name="favid" value="{{ $fav->id }}">
-                                    <button type="submit" class="btn-remove" title="Supprimer des favoris">
+                                    <button type="submit" class="btn-remove" title="Retirer">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 </form>
@@ -567,7 +538,6 @@
                                             <div class="mini-reply">
                                                 <span class="reply-author"> {{ $reply->user->fullname ?? 'Utilisateur' }}</span>
                                                 <span class="reply-text">Commentaire: {{ $reply->content }}</span>
-
                                             </div>
                                         @endforeach
                                     </div>
@@ -589,15 +559,49 @@
                 @csrf
                 <div style="margin-bottom: 1.2rem;">
                     <label style="display:block; margin-bottom: 8px; font-weight: 600;">Titre</label>
-                    <input type="text" name="titre" style="width:100%; padding:12px; border:1px solid #e2e8f0; border-radius:10px; box-sizing:border-box" placeholder="ex: Panne de secteur" required>
+                    <input type="text" name="titre" class="edit-field" placeholder="ex: Panne de secteur" required>
+                </div>
+                <div style="margin-bottom: 1.2rem;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Ville</label>
+                    <input type="text" name="city" class="edit-field" placeholder="ex: Casablanca" required>
                 </div>
                 <div style="margin-bottom: 1.5rem;">
                     <label style="display:block; margin-bottom: 8px; font-weight: 600;">Détails</label>
-                    <textarea name="description" rows="5" style="width:100%; padding:12px; border:1px solid #e2e8f0; border-radius:10px; box-sizing:border-box" placeholder="Décrivez votre problème..." required></textarea>
+                    <textarea name="description" rows="5" class="edit-field" placeholder="Décrivez votre problème..." required></textarea>
                 </div>
                 <div style="display:flex; gap:12px;">
                     <button type="submit" class="btn-submit">Publier</button>
-                    <button type="button" onclick="closeModal()" style="background:#f1f5f9; color:var(--text-main); border:none; padding:14px; border-radius:12px; width:100%; font-weight:700; cursor:pointer;">Annuler</button>
+                    <button type="button" onclick="closeModal('postModal')" class="btn-cancel-edit" style="flex:1">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editForm" class="modal">
+        <div class="modal-content">
+            <h2 style="font-weight: 800; margin-top: 0;">Modifier la question</h2>
+            <form id="realEditForm" action="{{ route('question.update') }}" method="POST">
+                @csrf
+                 <div class="edit-group" style="margin-bottom: 1rem;">
+                    <label>Titre de la question</label>
+                    <input type="text" name="titre" id="editTitreInput" class="edit-field" required>
+                </div>
+
+                <div class="edit-group" style="margin-bottom: 1rem;">
+                    <label>City </label>
+                    <input type="text" name="city" id="editcity" class="edit-field" required>
+                </div>
+
+                <div class="edit-group" style="margin-bottom: 1.5rem;">
+                    <label>Description</label>
+                    <textarea name="description" id="editDescInput" rows="6" class="edit-field" required></textarea>
+                </div>
+
+                <input type="text" name="question_id" id="question_id" class="edit-field" required>
+
+                <div class="edit-actions-row">
+                    <button type="submit" class="btn-save-edit">Modifier</button>
+                    <button type="button" onclick="closeModal('editForm')" class="btn-cancel-edit">Annuler</button>
                 </div>
             </form>
         </div>
@@ -605,11 +609,28 @@
 @endauth
 
 <script>
-    function openModal() { document.getElementById('postModal').style.display = 'block'; }
-    function closeModal() { document.getElementById('postModal').style.display = 'none'; }
+    function openModal(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function openEditModal(id, titre, desc) {
+        const form = document.getElementById('realEditForm');
+        form.action = "/questions/" + id;
+
+        document.getElementById('editTitreInput').value = titre;
+        document.getElementById('editDescInput').value = desc;
+
+        openModal('editForm');
+    }
 
     window.onclick = function(event) {
-        if (event.target.className === 'modal') closeModal();
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
     }
 
     function showSection(sectionId) {
@@ -624,17 +645,23 @@
             favoris.style.display = 'block';
             title.innerText = 'Mes Favoris';
             document.getElementById('link-favoris').classList.add('active');
-        } else if (sectionId === 'questions') {
-            feed.style.display = 'block';
-            favoris.style.display = 'none';
-            title.innerText = 'Mes Questions';
-            document.getElementById('link-questions').classList.add('active');
         } else {
             feed.style.display = 'block';
             favoris.style.display = 'none';
             title.innerText = 'Découvrir';
             document.getElementById('link-discover').classList.add('active');
         }
+    }
+
+    function openEditModal(id, titre, city, desc) {
+        document.getElementById('question_id').value = id;
+        document.getElementById('editTitreInput').value = titre;
+        document.getElementById('editcity').value = city;
+        document.getElementById('editDescInput').value = desc;
+
+
+
+        openModal('editForm');
     }
 </script>
 

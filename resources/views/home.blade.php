@@ -38,7 +38,6 @@
             min-height: 550px;
         }
 
-        /* --- Formulaires --- */
         .form-container {
             position: absolute;
             top: 0;
@@ -88,7 +87,6 @@
 
         button:active { transform: scale(0.95); }
 
-        /* --- Animation des panneaux --- */
         .sign-in-container { left: 0; width: 50%; z-index: 2; }
         .sign-up-container { left: 0; width: 50%; opacity: 0; z-index: 1; }
 
@@ -105,7 +103,6 @@
             50%, 100% { opacity: 1; z-index: 5; }
         }
 
-        /* --- Overlay (Partie Bleue) --- */
         .overlay-container {
             position: absolute;
             top: 0;
@@ -161,7 +158,6 @@
         .overlay-right { right: 0; transform: translateX(0); }
         .container.right-panel-active .overlay-right { transform: translateX(20%); }
 
-        /* Style bouton Ghost */
         button.ghost {
             background-color: transparent;
             border-color: var(--white);
@@ -173,7 +169,6 @@
             color: var(--primary);
         }
 
-        /* Animation de l'icône */
         .bounce-icon {
             animation: bounce 3s ease-in-out infinite;
             margin-bottom: 10px;

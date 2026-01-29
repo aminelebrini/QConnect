@@ -34,7 +34,27 @@ class QuestionRepository
     public function delete($favoris_id)
     {
         $favoris = Favoris::find($favoris_id);
-        $favoris->delete();
+        if($favoris) {
+            $favoris->delete();
+        }
+    }
+
+    public function deletequestion($question_id)
+    {
+        $question = Question::find($question_id);
+       if($question) {
+           $question->delete();
+       }
+    }
+
+    public function modifier($titre, $description, $city, $question_id)
+    {
+        $update = Question::where('id', $question_id)->update([
+            'titre'       => $titre,
+            'description' => $description,
+            'city'        => $city,
+        ]);
+        return $update;
     }
 }
 

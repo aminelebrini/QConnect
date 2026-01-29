@@ -29,7 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/createQuestion', [QuestionController::class, 'Question'])->name('questions');
     Route::post('/Reponse', [ReponseController::class, 'Reponse'])->name('reponses.store');
     Route::post('/Favoris', [QuestionController::class, 'Favoris'])->name('favoris.store');
-    Route::post('/delete', [QuestionController::class, 'delete'])->name('favoris.delete');
+    Route::post('/favoris/delete', [FavorisController::class, 'delete'])->name('favoris.delete');
+    Route::post('/question/delete', [QuestionController::class, 'deletequestion'])->name('question.delete');
+    Route::post('/question/update', [QuestionController::class, 'update'])->name('question.update');
 
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
